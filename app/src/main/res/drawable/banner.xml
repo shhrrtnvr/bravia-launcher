@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 16:9 launcher banner: dark tile with a simple house mark. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="320dp"
+    android:height="180dp"
+    android:viewportWidth="320"
+    android:viewportHeight="180">
+    <path android:fillColor="#FF1D232C" android:pathData="M0,0h320v180h-320z" />
+    <path android:fillColor="#FFF2F4F7" android:pathData="M160,44 L208,84 L196,84 L196,132 L124,132 L124,84 L112,84 Z" />
+    <path android:fillColor="#FF1D232C" android:pathData="M150,104h20v28h-20z" />
+</vector>

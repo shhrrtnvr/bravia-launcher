@@ -1,0 +1,15 @@
+{
+  "address": "10.x.x.x/16",
+  "dns": "1.1.1.1",
+  "port": 51820,
+  "servers": {
+    "london": { "host": "uk-london.example-vpn.com", "public_key": "<server public key>" },
+    "manchester": { "host": "uk-manchester.example-vpn.com", "public_key": "<server public key>" },
+    "edinburgh": { "host": "uk-edinburgh.example-vpn.com", "public_key": "<server public key>" },
+    "glasgow": { "host": "uk-glasgow.example-vpn.com", "public_key": "<server public key>" },
+    "us": { "host": "us-newyork.example-vpn.com", "public_key": "<server public key>" },
+    "japan": { "host": "jp-tokyo.example-vpn.com", "public_key": "<server public key>" },
+    "canada": { "host": "ca-toronto.example-vpn.com", "public_key": "<server public key>" },
+    "spain": { "host": "es-madrid.example-vpn.com", "public_key": "<server public key>" }
+  }
+}

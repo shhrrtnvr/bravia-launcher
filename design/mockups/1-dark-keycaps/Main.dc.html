@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Sumi theme</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Shippori+Mincho:wght@500;700&amp;family=Zen+Kaku+Gothic+New:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#e8806b}a:hover{color:#f0a18f}
+@keyframes sumiRain{0%{transform:translateY(-80px);opacity:0}15%{opacity:.5}100%{transform:translateY(600px);opacity:0}}
+.sumi-drop{position:absolute;top:0;width:1px;height:46px;background:linear-gradient(180deg,rgba(236,228,214,0),rgba(236,228,214,.35));animation:sumiRain 2.6s linear infinite}
+.sumi-cap{transition:transform .14s ease,box-shadow .14s ease,background .14s ease}
+</style>
+</helmet>
+<div style="width: 960px; height: 540px; position: relative; overflow: hidden; box-sizing: border-box; background: radial-gradient(120% 90% at 85% 0%, #2A231D 0%, #15120F 55%, #100E0C 100%); font-family: Inter, system-ui, sans-serif; color: #ECE4D6;">
+
+  <div aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none;">
+    <sc-for list="{{drops}}" as="d" hint-placeholder-count="18">
+      <div class="sumi-drop" style="left: {{d.left}}; animation-delay: {{d.delay}}; animation-duration: {{d.dur}};"></div>
+    </sc-for>
+  </div>
+
+  <div aria-hidden="true" style="position: absolute; right: -40px; bottom: -70px; font-family: 'Shippori Mincho', serif; font-size: 360px; line-height: 1; color: rgba(236,228,214,0.035); pointer-events: none;">墨</div>
+
+  <div style="position: relative; box-sizing: border-box; height: 100%; padding: 30px 48px 0; display: flex; flex-direction: column; gap: 22px;">
+
+    <div style="display: flex; align-items: flex-end; gap: 18px;">
+      <div style="font-family: 'Shippori Mincho', serif; font-weight: 500; font-size: 56px; line-height: 0.9; letter-spacing: 1px;">04:14</div>
+      <div style="display: flex; flex-direction: column; gap: 4px; padding-bottom: 2px; flex-grow: 1;">
+        <div style="font-family: 'Zen Kaku Gothic New', sans-serif; font-size: 15px; color: #B9AE9D;">金曜日 · 十一月二十七日</div>
+        <div style="font-size: 13px; color: #8E8476; letter-spacing: 0.4px;">Friday 27 November · light rain, 21°</div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <div style="display: flex; align-items: center; gap: 10px; padding: 9px 14px 9px 10px; border-radius: 10px; background: linear-gradient(180deg,#332D27,#26211D); box-shadow: inset 0 -4px 0 #1A1714, 0 4px 10px rgba(0,0,0,.35);">
+          <div style="width: 26px; height: 26px; border-radius: 6px; background: #C8442E; color: #F6EBDD; font-family: 'Shippori Mincho', serif; font-weight: 700; font-size: 16px; display: flex; align-items: center; justify-content: center;">英</div>
+          <div style="font-size: 14px; font-weight: 500;">VPN · UK</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <div style="display: flex; align-items: baseline; gap: 10px;">
+        <div style="font-size: 13px; font-weight: 600; letter-spacing: 2px; color: #B9AE9D;">FAVOURITES</div>
+        <div style="font-family: 'Zen Kaku Gothic New', sans-serif; font-size: 12px; color: #6F675C;">お気に入り</div>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px;">
+        <sc-for list="{{favs}}" as="k" hint-placeholder-count="8">
+          <button class="sumi-cap" onMouseEnter="{{k.focus}}" onClick="{{k.focus}}" aria-label="{{k.name}}" style="outline: none; {{k.style}}">
+            <span style="font-family: Inter, sans-serif; font-weight: 600; font-size: 17px; color: {{k.legend}};">{{k.name}}</span>
+            <span style="font-family: 'Zen Kaku Gothic New', sans-serif; font-size: 12px; align-self: flex-end; color: {{k.sub}};">{{k.kana}}</span>
+          </button>
+        </sc-for>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <div style="display: flex; align-items: baseline; gap: 10px;">
+        <div style="font-size: 13px; font-weight: 600; letter-spacing: 2px; color: #B9AE9D;">ALL APPS</div>
+        <div style="font-family: 'Zen Kaku Gothic New', sans-serif; font-size: 12px; color: #6F675C;">すべて</div>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px;">
+        <sc-for list="{{rest}}" as="k" hint-placeholder-count="6">
+          <button class="sumi-cap" onMouseEnter="{{k.focus}}" onClick="{{k.focus}}" aria-label="{{k.name}}" style="outline: none; {{k.style}}">
+            <span style="font-family: Inter, sans-serif; font-weight: 500; font-size: 13px; color: {{k.legend}};">{{k.name}}</span>
+            <span style="font-family: 'Zen Kaku Gothic New', sans-serif; font-size: 11px; align-self: flex-end; color: {{k.sub}};">{{k.kana}}</span>
+          </button>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#C8442E","options":["#C8442E","#D9A441","#5E8C6A","#4C6FA8"]},"rain":{"editor":"boolean","default":true},"$preview":{"width":960,"height":540}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { focused: 0 }; }
+  renderVals() {
+    const accent = this.props.accent ?? '#C8442E';
+    const rain = this.props.rain ?? true;
+    const favs = [
+      ['YouTube', 'ユーチューブ'], ['Stremio', 'ストレミオ'], ['TV', 'テレビ'], ['Hoichoi', 'ホイチョイ'],
+      ['Netflix', 'ネットフリックス'], ['Prime Video', 'プライム'], ['BBC iPlayer', 'アイプレイヤー'], ['ITVX', 'アイティーヴィー']
+    ];
+    const rest = [
+      ['Channel 4', 'チャンネル4'], ['Kodi', 'コディ'], ['Plex', 'プレックス'], ['Spotify', 'スポティファイ'],
+      ['Settings', '設定'], ['Inputs', '入力']
+    ];
+    const cap = (big, i, focused) => {
+      const base = 'display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start; box-sizing: border-box; border: none; cursor: pointer; text-align: left; border-radius: ' + (big ? 12 : 10) + 'px; height: ' + (big ? 96 : 70) + 'px; padding: ' + (big ? '14px 16px 16px' : '10px 12px 12px') + ';';
+      if (focused) {
+        return base + ' background: linear-gradient(180deg, ' + accent + ' 0%, ' + accent + ' 100%); box-shadow: inset 0 -7px 0 rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.25), 0 14px 26px rgba(0,0,0,.5); transform: translateY(-5px);';
+      }
+      return base + ' background: linear-gradient(180deg, #37312B 0%, #2A2520 100%); box-shadow: inset 0 -7px 0 #1C1916, inset 0 1px 0 rgba(255,255,255,.06), 0 6px 12px rgba(0,0,0,.35);';
+    };
+    const mk = (list, big, offset) => list.map(([name, kana], j) => {
+      const i = j + offset;
+      const f = this.state.focused === i;
+      return {
+        name, kana,
+        style: cap(big, i, f),
+        legend: f ? '#FBF3E6' : '#ECE4D6',
+        sub: f ? 'rgba(251,243,230,.85)' : '#8E8476',
+        focus: () => this.setState({ focused: i })
+      };
+    });
+    const drops = rain ? Array.from({ length: 22 }, (_, n) => ({
+      left: ((n * 43.7) % 100).toFixed(1) + '%',
+      delay: ((n * 0.37) % 2.6).toFixed(2) + 's',
+      dur: (2.1 + (n % 5) * 0.25).toFixed(2) + 's'
+    })) : [];
+    return { favs: mk(favs, true, 0), rest: mk(rest, false, 100), drops };
+  }
+}
+</script>
+</body>
+</html>

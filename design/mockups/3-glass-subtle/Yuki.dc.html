@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Yuki theme</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#3F6E9A}a:hover{color:#2A4F73}
+@keyframes yukiFall{0%{transform:translate(0,-20px);opacity:0}12%{opacity:1}50%{transform:translate(14px,280px)}100%{transform:translate(-6px,580px);opacity:0}}
+.yuki-flake{position:absolute;top:0;border-radius:50%;background:#C3D0DE;animation:yukiFall 14s linear infinite}
+.yuki-cap{transition:transform .14s ease,box-shadow .14s ease}
+</style>
+</helmet>
+<div style="width: 960px; height: 540px; position: relative; overflow: hidden; box-sizing: border-box; background: radial-gradient(55% 70% at 90% 6%, rgba(147,178,209,.22) 0%, rgba(147,178,209,0) 70%), radial-gradient(50% 60% at 4% 95%, rgba(180,190,210,.2) 0%, rgba(180,190,210,0) 70%), radial-gradient(40% 50% at 45% 55%, rgba(255,255,255,.75) 0%, rgba(255,255,255,0) 70%), #EEF2F6; font-family: Inter, system-ui, sans-serif; color: #29313A;">
+
+  <div aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none;">
+    <sc-for list="{{flakes}}" as="s" hint-placeholder-count="16">
+      <div class="yuki-flake" style="left: {{s.left}}; width: {{s.size}}; height: {{s.size}}; opacity: {{s.op}}; animation-delay: {{s.delay}}; animation-duration: {{s.dur}};"></div>
+    </sc-for>
+  </div>
+
+  <div style="position: relative; box-sizing: border-box; height: 100%; padding: 28px 44px 0; display: flex; flex-direction: column; gap: 20px;">
+
+    <div style="display: flex; gap: 14px; height: 84px;">
+      <div style="flex-grow: 1; position: relative; overflow: hidden; border-radius: 18px; background: rgba(255,255,255,.5); backdrop-filter: blur(24px) saturate(150%); -webkit-backdrop-filter: blur(24px) saturate(150%); border: 1px solid rgba(255,255,255,.75); box-shadow: inset 0 1px 0 rgba(255,255,255,.9), 0 10px 30px rgba(40,55,75,.07); display: flex; align-items: center; gap: 18px; padding: 0 24px 6px;">
+        <svg aria-hidden="true" width="200" height="84" viewBox="0 0 200 84" style="position: absolute; right: 0; bottom: 0;">
+          <path d="M40 84 L 110 44 L 128 36 L 146 42 L 200 70 L 200 84 Z" fill="#E4EAF1"></path>
+          <path d="M100 50 L 110 44 L 128 36 L 146 42 L 156 48 L 146 50 L 138 46 L 130 52 L 122 46 L 114 52 Z" fill="#FFFFFF" stroke="#D5DEE8" stroke-width="1"></path>
+        </svg>
+        <div style="position: relative; font-weight: 400; font-size: 42px; line-height: 1; letter-spacing: -1px;">04:14</div>
+        <div style="position: relative; font-size: 14px; color: #6E7885;">Friday, 27 November</div>
+      </div>
+      <button class="yuki-cap" onMouseEnter="{{vpn.focus}}" onClick="{{vpn.focus}}" aria-label="VPN: UK" style="outline: none; {{vpn.style}}">
+        <span style="font-size: 12px; font-weight: 500; color: #6E7885; letter-spacing: 1px;">VPN</span>
+        <span style="font-size: 18px; font-weight: 600; color: #29313A;">UK</span>
+      </button>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px;">
+      <sc-for list="{{favs}}" as="k" hint-placeholder-count="8">
+        <button class="yuki-cap" onMouseEnter="{{k.focus}}" onClick="{{k.focus}}" aria-label="{{k.name}}" style="outline: none; {{k.style}}">
+          <span style="font-weight: 500; font-size: 17px; color: #29313A;">{{k.name}}</span>
+        </button>
+      </sc-for>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px;">
+      <sc-for list="{{rest}}" as="k" hint-placeholder-count="12">
+        <button class="yuki-cap" onMouseEnter="{{k.focus}}" onClick="{{k.focus}}" aria-label="{{k.name}}" style="outline: none; {{k.style}}">
+          <span style="font-weight: 500; font-size: 13px; color: #29313A;">{{k.name}}</span>
+        </button>
+      </sc-for>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#93B2D1","options":["#93B2D1","#A9C4C7","#B4AFCF","#29313A"]},"snow":{"editor":"range","default":18,"min":0,"max":60,"step":2},"$preview":{"width":960,"height":540}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { focused: 0 }; }
+  renderVals() {
+    const accent = this.props.accent ?? '#93B2D1';
+    const snow = this.props.snow ?? 18;
+    const favs = [['YouTube'], ['Stremio'], ['TV', true], ['Hoichoi'], ['Netflix'], ['Prime Video'], ['BBC iPlayer'], ['ITVX']];
+    const rest = [['Settings', true], ['Channel 4'], ['Kodi'], ['Plex'], ['Spotify'], ['Inputs', true], ['Downloader'], ['Pluto TV'], ['SmartTube'], ['MX Player'], ['LocalSend'], ['WireGuard']];
+    // Glass keycaps: frosted white over the soft backdrop; the focused one grows and catches the light (Apple TV style).
+    const cap = (h, r, pad, mod, focused) => {
+      const face = mod ? 'rgba(232,239,246,.62)' : 'rgba(255,255,255,.66)';
+      const base = 'position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; align-items: flex-start; box-sizing: border-box; cursor: pointer; text-align: left; border-radius: ' + (r + 4) + 'px; height: ' + h + 'px; padding: ' + pad + '; border: 1px solid rgba(255,255,255,.8); backdrop-filter: blur(18px) saturate(150%); -webkit-backdrop-filter: blur(18px) saturate(150%);';
+      if (focused) {
+        return base + ' background: linear-gradient(135deg, rgba(255,255,255,.95) 0%, rgba(255,255,255,.55) 42%, rgba(255,255,255,.8) 100%); box-shadow: inset 0 1px 0 #FFFFFF, inset 0 -4px 0 rgba(0,0,0,.04), 0 0 0 1.5px ' + accent + '88, 0 24px 40px rgba(40,55,75,.2); transform: translateY(-4px) scale(1.06); z-index: 2;';
+      }
+      return base + ' background: ' + face + '; box-shadow: inset 0 1px 0 rgba(255,255,255,.9), inset 0 -4px 0 rgba(0,0,0,.035), 0 6px 16px rgba(40,55,75,.06);';
+    };
+    const mk = (list, big, offset) => list.map(([name, mod], j) => {
+      const i = j + offset;
+      const f = this.state.focused === i;
+      return {
+        name,
+        style: big ? cap(100, 14, '0 16px 20px', !!mod, f) : cap(70, 11, '0 12px 16px', !!mod, f),
+        focus: () => this.setState({ focused: i })
+      };
+    });
+    const vf = this.state.focused === -1;
+    const vpn = {
+      style: cap(84, 14, '0 16px 18px', true, vf) + ' width: 130px; flex-shrink: 0; gap: 2px;',
+      focus: () => this.setState({ focused: -1 })
+    };
+    const flakes = Array.from({ length: snow }, (_, n) => ({
+      left: ((n * 29.3) % 100).toFixed(1) + '%',
+      size: (3 + (n % 3)) + 'px',
+      op: (0.4 + (n % 4) * 0.12).toFixed(2),
+      delay: ((n * 0.83) % 14).toFixed(2) + 's',
+      dur: (12 + (n % 5) * 1.2).toFixed(1) + 's'
+    }));
+    return { favs: mk(favs, true, 0), rest: mk(rest, false, 100), vpn, flakes };
+  }
+}
+</script>
+</body>
+</html>

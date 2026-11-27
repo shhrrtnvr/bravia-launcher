@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Icon styles</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#9E3B32}a:hover{color:#7A2C25}
+</style>
+</helmet>
+<div style="width: 1200px; height: 800px; box-sizing: border-box; padding: 36px 44px; background: linear-gradient(180deg, #F4F1EA 0%, #ECE7DE 100%); font-family: Inter, system-ui, sans-serif; color: #2B2927; display: flex; flex-direction: column; gap: 26px;">
+  <sc-for list="{{styles}}" as="st" hint-placeholder-count="3">
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <div style="display: flex; align-items: baseline; gap: 12px;">
+        <div style="font-size: 18px; font-weight: 700;">{{st.title}}</div>
+        <div style="font-size: 13px; color: #6B6660;">{{st.note}}</div>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px;">
+        <sc-for list="{{st.favs}}" as="k" hint-placeholder-count="8">
+          <div style="height: 64px; border-radius: 16px; background: rgba(255,255,255,.66); border: 1px solid rgba(255,255,255,.85); box-shadow: inset 0 1px 0 #FFFFFF, inset 0 -4px 0 rgba(0,0,0,.035), 0 6px 14px rgba(40,35,30,.07); display: flex; align-items: center; gap: 14px; padding: 0 14px;">
+            <div style="{{k.box}}">
+              <sc-if value="{{k.letter}}" hint-placeholder-val="{{false}}">
+                <span style="{{k.letterStyle}}">{{k.letter}}</span>
+              </sc-if>
+              <sc-if value="{{k.path}}" hint-placeholder-val="{{true}}">
+                <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="{{k.path}}" fill-rule="evenodd" fill="{{k.fill}}" stroke="{{k.stroke}}" stroke-width="{{k.sw}}" stroke-linejoin="round" stroke-linecap="round"></path></svg>
+              </sc-if>
+              <sc-if value="{{k.dot}}" hint-placeholder-val="{{false}}">
+                <div style="position: absolute; right: -3px; bottom: -3px; width: 10px; height: 10px; border-radius: 5px; background: {{k.dot}}; box-shadow: 0 0 0 2px #FFFFFF;"></div>
+              </sc-if>
+            </div>
+            <div style="font-size: 15px; font-weight: 500;">{{k.name}}</div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 10px;">
+        <sc-for list="{{st.small}}" as="k" hint-placeholder-count="8">
+          <div style="height: 50px; border-radius: 13px; background: rgba(255,255,255,.6); border: 1px solid rgba(255,255,255,.85); box-shadow: inset 0 -3px 0 rgba(0,0,0,.035), 0 4px 10px rgba(40,35,30,.06); display: flex; align-items: center; gap: 9px; padding: 0 10px;">
+            <div style="{{k.boxSmall}}">
+              <sc-if value="{{k.letter}}" hint-placeholder-val="{{false}}">
+                <span style="{{k.letterStyleSmall}}">{{k.letter}}</span>
+              </sc-if>
+              <sc-if value="{{k.path}}" hint-placeholder-val="{{true}}">
+                <svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true"><path d="{{k.path}}" fill-rule="evenodd" fill="{{k.fill}}" stroke="{{k.stroke}}" stroke-width="{{k.sw}}" stroke-linejoin="round" stroke-linecap="round"></path></svg>
+              </sc-if>
+              <sc-if value="{{k.dot}}" hint-placeholder-val="{{false}}">
+                <div style="position: absolute; right: -2px; bottom: -2px; width: 7px; height: 7px; border-radius: 4px; background: {{k.dot}}; box-shadow: 0 0 0 1.5px #FFFFFF;"></div>
+              </sc-if>
+            </div>
+            <div style="font-size: 12px; font-weight: 500;">{{k.name}}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </sc-for>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1200,"height":800}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const ink = '#2B2927';
+    // Generic symbols (not brand logos). 24x24 viewBox.
+    const P = {
+      play: 'M9 6.5v11l9-5.5z',
+      diamond: 'M12 2.5 21.5 12 12 21.5 2.5 12z M10 8.5v7l5.5-3.5z',
+      tv: 'M4 5.5h16a1.5 1.5 0 0 1 1.5 1.5v9a1.5 1.5 0 0 1-1.5 1.5H4A1.5 1.5 0 0 1 2.5 16V7A1.5 1.5 0 0 1 4 5.5z M8 20.5h8',
+      down: 'M12 4v11 M7 10.5l5 5 5-5 M5.5 19.5h13',
+      gear: 'M12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7z M12 2.5v3 M12 18.5v3 M2.5 12h3 M18.5 12h3 M5.3 5.3l2.1 2.1 M16.6 16.6l2.1 2.1 M5.3 18.7l2.1-2.1 M16.6 7.4l2.1-2.1',
+      input: 'M3.5 7V5.5A1.5 1.5 0 0 1 5 4h14a1.5 1.5 0 0 1 1.5 1.5v13A1.5 1.5 0 0 1 19 20H5a1.5 1.5 0 0 1-1.5-1.5V17 M2 12h11 M9.5 8.5 13 12l-3.5 3.5',
+      grid: 'M5 5h4v4H5z M15 5h4v4h-4z M5 15h4v4H5z M15 15h4v4h-4z',
+      kodi: 'M12 3 20 11 12 19 4 11z'
+    };
+    // name, brand colour, foreground on filled, glyph (path key) or letter, filled-glyph uses stroke?
+    const apps = [
+      { name: 'YouTube', c: '#E53935', fg: '#FFFFFF', path: 'play' },
+      { name: 'Stremio', c: '#6B4DE6', fg: '#FFFFFF', path: 'diamond' },
+      { name: 'TV', c: '#3B7DD8', fg: '#FFFFFF', path: 'tv', line: true },
+      { name: 'Hoichoi', c: '#C2185B', fg: '#FFFFFF', letter: 'h' },
+      { name: 'Netflix', c: '#1A1A1A', fg: '#E50914', letter: 'N', tint: '#E50914' },
+      { name: 'Prime Video', c: '#1A98FF', fg: '#FFFFFF', letter: 'p' },
+      { name: 'BBC iPlayer', c: '#1A1A1A', fg: '#F54997', letter: 'i', tint: '#F54997' },
+      { name: 'ITVX', c: '#D7F23B', fg: '#14233A', letter: 'X', tint: '#7E9A00' }
+    ];
+    const small = [
+      { name: 'Settings', c: '#6B6660', fg: '#FFFFFF', path: 'gear', line: true, sym: true },
+      { name: 'Inputs', c: '#6B6660', fg: '#FFFFFF', path: 'input', line: true, sym: true },
+      { name: 'Channel 4', c: '#2E8B57', fg: '#FFFFFF', letter: '4' },
+      { name: 'Downloader', c: '#F37021', fg: '#FFFFFF', path: 'down', line: true },
+      { name: 'Kodi', c: '#17B2E7', fg: '#FFFFFF', path: 'kodi' },
+      { name: 'Spotify', c: '#1DB954', fg: '#FFFFFF', letter: 'S' },
+      { name: 'Plex', c: '#E5A00D', fg: '#1A1A1A', letter: '›' },
+      { name: 'All apps', c: '#6B6660', fg: '#FFFFFF', path: 'grid', line: true, sym: true }
+    ];
+    const tint = (hex, a) => {
+      const n = parseInt(hex.slice(1), 16);
+      return 'rgba(' + ((n >> 16) & 255) + ',' + ((n >> 8) & 255) + ',' + (n & 255) + ',' + a + ')';
+    };
+    const make = (style) => (a) => {
+      const brand = a.tint || a.c;
+      let bg, fg, dot = '';
+      if (style === 'A') { bg = a.sym ? 'rgba(107,102,96,.14)' : a.c; fg = a.sym ? ink : a.fg; }
+      if (style === 'B') { bg = 'transparent'; fg = ink; dot = a.sym ? '' : brand; }
+      if (style === 'C') { bg = a.sym ? 'rgba(107,102,96,.12)' : tint(brand, 0.16); fg = a.sym ? ink : brand; }
+      const border = style === 'B' ? 'border: 1.8px solid ' + ink + ';' : '';
+      const box = (s, r) => 'position: relative; width: ' + s + 'px; height: ' + s + 'px; border-radius: ' + r + 'px; background: ' + bg + '; ' + border + ' box-sizing: border-box; display: flex; align-items: center; justify-content: center; flex-shrink: 0;';
+      const glyphFill = a.line ? 'none' : fg;
+      return {
+        name: a.name,
+        box: box(40, 12),
+        boxSmall: box(28, 8),
+        letter: a.letter || '',
+        letterStyle: 'font-size: 22px; font-weight: 800; line-height: 1; color: ' + fg + ';',
+        letterStyleSmall: 'font-size: 15px; font-weight: 800; line-height: 1; color: ' + fg + ';',
+        path: a.path ? P[a.path] : '',
+        fill: glyphFill,
+        stroke: a.line ? fg : 'none',
+        sw: a.line ? 1.8 : 0,
+        dot
+      };
+    };
+    const styles = [
+      { key: 'A', title: 'A · Filled', note: 'brand-colour rounded square, white symbol or letter' },
+      { key: 'B', title: 'B · Ink', note: 'dark outline symbol on the glass, brand colour only as a small dot' },
+      { key: 'C', title: 'C · Tinted', note: 'soft brand tint, symbol in the brand colour' }
+    ].map((s) => ({ ...s, favs: apps.map(make(s.key)), small: small.map(make(s.key)) }));
+    return { styles };
+  }
+}
+</script>
+</body>
+</html>

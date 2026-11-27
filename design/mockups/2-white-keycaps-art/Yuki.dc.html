@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Yuki theme</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Shippori+Mincho:wght@500;700&amp;family=Zen+Kaku+Gothic+New:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#3F6E9A}a:hover{color:#2A4F73}
+@keyframes yukiFall{0%{transform:translate(0,-20px);opacity:0}10%{opacity:1}50%{transform:translate(16px,280px)}100%{transform:translate(-6px,580px);opacity:0}}
+.yuki-flake{position:absolute;top:0;border-radius:50%;background:#AFC2D8;animation:yukiFall 12s linear infinite}
+.yuki-cap{transition:transform .14s ease,box-shadow .14s ease,background .14s ease}
+</style>
+</helmet>
+<div style="width: 960px; height: 540px; position: relative; overflow: hidden; box-sizing: border-box; background: linear-gradient(180deg, #F6F8FB 0%, #E8EEF4 100%); font-family: Inter, system-ui, sans-serif; color: #2C3A4A;">
+
+  <div aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none;">
+    <sc-for list="{{flakes}}" as="s" hint-placeholder-count="28">
+      <div class="yuki-flake" style="left: {{s.left}}; width: {{s.size}}; height: {{s.size}}; opacity: {{s.op}}; animation-delay: {{s.delay}}; animation-duration: {{s.dur}};"></div>
+    </sc-for>
+  </div>
+
+  <div style="position: relative; box-sizing: border-box; height: 100%; padding: 26px 44px 0; display: flex; flex-direction: column; gap: 20px;">
+
+    <div style="display: flex; gap: 14px; height: 84px;">
+      <div style="flex-grow: 1; position: relative; overflow: hidden; border-radius: 14px; background: linear-gradient(180deg, #FFFFFF 0%, #F0F4F8 100%); box-shadow: inset 0 -7px 0 #D3DDE8, inset 0 1px 0 #FFFFFF, 0 6px 12px rgba(50,70,100,.1); display: flex; align-items: center; gap: 18px; padding: 0 22px 6px;">
+        <svg aria-hidden="true" width="100%" height="100%" viewBox="0 0 600 84" preserveAspectRatio="xMaxYMid slice" style="position: absolute; inset: 0;">
+          <path d="M300 84 L 400 40 L 450 16 L 474 12 L 500 20 L 560 50 L 600 62 L 600 84 Z" fill="#C9D7E6" opacity="0.55"></path>
+          <path d="M432 26 L 450 16 L 474 12 L 500 20 L 516 30 L 504 33 L 492 27 L 482 35 L 470 28 L 460 36 L 450 29 L 440 34 Z" fill="#FFFFFF"></path>
+          <path d="M260 84 C 330 66, 380 72, 440 64 C 500 58, 560 70, 600 66 L 600 84 Z" fill="#DCE5EF"></path>
+          <circle cx="560" cy="22" r="9" fill="#F2F5F9" stroke="#C9D7E6" stroke-width="1.5"></circle>
+        </svg>
+        <div style="position: relative; font-family: 'Shippori Mincho', serif; font-weight: 500; font-size: 44px; line-height: 1; color: #2C3A4A;">04:14</div>
+        <div style="position: relative; display: flex; flex-direction: column; gap: 3px;">
+          <div style="font-size: 13px; color: #556578;">Friday 27 November</div>
+          <div style="font-family: 'Zen Kaku Gothic New', sans-serif; font-size: 13px; color: #3F6E9A;">金曜日 · 雪</div>
+        </div>
+      </div>
+      <button class="yuki-cap" onMouseEnter="{{vpn.focus}}" onClick="{{vpn.focus}}" aria-label="VPN: UK" style="outline: none; {{vpn.style}}">
+        <span style="font-size: 15px; font-weight: 600; color: #2C3A4A;">VPN · UK</span>
+        <span style="font-family: 'Shippori Mincho', serif; font-weight: 700; font-size: 20px; align-self: flex-end; color: #3F6E9A;">英</span>
+      </button>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px;">
+      <sc-for list="{{favs}}" as="k" hint-placeholder-count="8">
+        <button class="yuki-cap" onMouseEnter="{{k.focus}}" onClick="{{k.focus}}" aria-label="{{k.name}}" style="outline: none; {{k.style}}">
+          <span style="font-weight: 600; font-size: 17px; color: #2C3A4A;">{{k.name}}</span>
+          <span style="font-family: 'Zen Kaku Gothic New', sans-serif; font-size: 13px; align-self: flex-end; color: #3F6E9A;">{{k.kana}}</span>
+        </button>
+      </sc-for>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px;">
+      <sc-for list="{{rest}}" as="k" hint-placeholder-count="12">
+        <button class="yuki-cap" onMouseEnter="{{k.focus}}" onClick="{{k.focus}}" aria-label="{{k.name}}" style="outline: none; {{k.style}}">
+          <span style="font-weight: 500; font-size: 13px; color: #2C3A4A;">{{k.name}}</span>
+          <span style="font-family: 'Zen Kaku Gothic New', sans-serif; font-size: 11px; align-self: flex-end; color: #3F6E9A;">{{k.kana}}</span>
+        </button>
+      </sc-for>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#7FA6CF","options":["#7FA6CF","#9CC3C9","#B7A7D6","#D9A7B4"]},"snow":{"editor":"range","default":32,"min":0,"max":80,"step":4},"$preview":{"width":960,"height":540}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { focused: 0 }; }
+  renderVals() {
+    const accent = this.props.accent ?? '#7FA6CF';
+    const snow = this.props.snow ?? 32;
+    const favs = [
+      ['YouTube', 'ユーチューブ'], ['Stremio', 'ストレミオ'], ['TV', 'テレビ', 'ice'], ['Hoichoi', 'ホイチョイ'],
+      ['Netflix', 'ネットフリックス'], ['Prime Video', 'プライム'], ['BBC iPlayer', 'アイプレイヤー'], ['ITVX', 'アイティーヴィー']
+    ];
+    const rest = [
+      ['Settings', '設定', 'ice'], ['Channel 4', 'チャンネル4'], ['Kodi', 'コディ'], ['Plex', 'プレックス'], ['Spotify', 'スポティファイ'], ['Inputs', '入力', 'ice'],
+      ['Downloader', 'ダウンローダー'], ['Pluto TV', 'プルート'], ['SmartTube', 'スマートチューブ'], ['MX Player', 'エムエックス'], ['LocalSend', 'ローカルセンド'], ['WireGuard', 'ワイヤーガード']
+    ];
+    const faces = {
+      white: ['#FFFFFF', '#F0F4F8', '#D3DDE8'],
+      ice: ['#EAF1F8', '#DCE7F2', '#BFD0E2']
+    };
+    const cap = (h, r, pad, tone, focused) => {
+      const f = faces[tone];
+      const base = 'position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start; box-sizing: border-box; border: none; cursor: pointer; text-align: left; border-radius: ' + r + 'px; height: ' + h + 'px; padding: ' + pad + '; background: linear-gradient(180deg, ' + f[0] + ' 0%, ' + f[1] + ' 100%);';
+      if (focused) {
+        return base + ' box-shadow: inset 0 -7px 0 ' + f[2] + ', inset 0 1px 0 #FFFFFF, 0 0 0 3px ' + accent + ', 0 0 24px rgba(127,166,207,.45), 0 16px 26px rgba(50,70,100,.2); transform: translateY(-5px);';
+      }
+      return base + ' box-shadow: inset 0 -7px 0 ' + f[2] + ', inset 0 1px 0 #FFFFFF, 0 6px 12px rgba(50,70,100,.1);';
+    };
+    const mk = (list, big, offset) => list.map(([name, kana, tone], j) => {
+      const i = j + offset;
+      const f = this.state.focused === i;
+      return {
+        name, kana,
+        style: big ? cap(100, 14, '14px 16px 18px', tone || 'white', f) : cap(70, 11, '10px 12px 14px', tone || 'white', f),
+        focus: () => this.setState({ focused: i })
+      };
+    });
+    const vf = this.state.focused === -1;
+    const vpn = {
+      style: cap(84, 14, '12px 16px 16px', 'ice', vf) + ' width: 150px; flex-shrink: 0;',
+      focus: () => this.setState({ focused: -1 })
+    };
+    const flakes = Array.from({ length: snow }, (_, n) => ({
+      left: ((n * 29.3) % 100).toFixed(1) + '%',
+      size: (3 + (n % 4)) + 'px',
+      op: (0.45 + (n % 5) * 0.1).toFixed(2),
+      delay: ((n * 0.61) % 12).toFixed(2) + 's',
+      dur: (10 + (n % 6) * 1.1).toFixed(1) + 's'
+    }));
+    return { favs: mk(favs, true, 0), rest: mk(rest, false, 100), vpn, flakes };
+  }
+}
+</script>
+</body>
+</html>

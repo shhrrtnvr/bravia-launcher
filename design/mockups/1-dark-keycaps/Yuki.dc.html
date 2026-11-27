@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Yuki theme</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Shippori+Mincho:wght@500;700&amp;family=Zen+Kaku+Gothic+New:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#BFD6F2}a:hover{color:#E3EEFB}
+@keyframes yukiFall{0%{transform:translate(0,-20px);opacity:0}10%{opacity:1}50%{transform:translate(18px,280px)}100%{transform:translate(-6px,580px);opacity:0}}
+.yuki-flake{position:absolute;top:0;border-radius:50%;background:#F4F8FF;animation:yukiFall 11s linear infinite}
+.yuki-cap{transition:transform .14s ease,box-shadow .14s ease,background .14s ease}
+</style>
+</helmet>
+<div style="width: 960px; height: 540px; position: relative; overflow: hidden; box-sizing: border-box; background: linear-gradient(180deg, #0B1326 0%, #15233F 55%, #24375A 100%); font-family: Inter, system-ui, sans-serif; color: #EAF1FB;">
+
+  <div aria-hidden="true" style="position: absolute; right: 120px; top: 34px; width: 58px; height: 58px; border-radius: 50%; background: radial-gradient(circle at 40% 40%, #FFF9E8 0%, #F1E6C8 60%, #D9CBA6 100%); box-shadow: 0 0 60px 18px rgba(255,240,200,.12);"></div>
+
+  <svg aria-hidden="true" width="960" height="260" viewBox="0 0 960 260" style="position: absolute; left: 0; bottom: 0; pointer-events: none;">
+    <path d="M0 230 L 210 190 L 330 210 L 470 120 L 560 60 L 600 52 L 650 70 L 760 140 L 860 180 L 960 170 L 960 260 L 0 260 Z" fill="#1B2C4B" opacity="0.9"></path>
+    <path d="M520 86 L 560 60 L 600 52 L 650 70 L 690 96 L 668 104 L 646 92 L 628 108 L 604 94 L 584 110 L 566 96 L 544 106 Z" fill="#E7EEF8" opacity="0.85"></path>
+    <path d="M0 260 L 0 236 L 140 222 L 300 240 L 460 226 L 640 244 L 820 228 L 960 238 L 960 260 Z" fill="#2B4166" opacity="0.8"></path>
+  </svg>
+
+  <div aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none;">
+    <sc-for list="{{flakes}}" as="s" hint-placeholder-count="30">
+      <div class="yuki-flake" style="left: {{s.left}}; width: {{s.size}}; height: {{s.size}}; opacity: {{s.op}}; animation-delay: {{s.delay}}; animation-duration: {{s.dur}};"></div>
+    </sc-for>
+  </div>
+
+  <div style="position: relative; box-sizing: border-box; height: 100%; padding: 30px 48px 0; display: flex; flex-direction: column; gap: 22px;">
+
+    <div style="display: flex; align-items: flex-end; gap: 18px;">
+      <div style="font-family: 'Shippori Mincho', serif; font-weight: 500; font-size: 56px; line-height: 0.9;">04:14</div>
+      <div style="display: flex; flex-direction: column; gap: 4px; padding-bottom: 2px; flex-grow: 1;">
+        <div style="font-family: 'Zen Kaku Gothic New', sans-serif; font-size: 15px; color: #B3C4DD;">金曜日 · 雪の夜</div>
+        <div style="font-size: 13px; color: #9AADC9;">Friday 27 November · winter night</div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 10px; padding: 9px 14px 9px 10px; margin-right: 96px; border-radius: 12px; background: rgba(234,241,251,.08); box-shadow: inset 0 -4px 0 rgba(0,0,0,.25), inset 0 0 0 1px rgba(234,241,251,.12);">
+        <div style="width: 26px; height: 26px; border-radius: 6px; background: #BFD6F2; color: #0F1C34; font-family: 'Shippori Mincho', serif; font-weight: 700; font-size: 15px; display: flex; align-items: center; justify-content: center;">英</div>
+        <div style="font-size: 14px; font-weight: 500;">VPN · UK</div>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <div style="display: flex; align-items: baseline; gap: 10px;">
+        <div style="font-size: 13px; font-weight: 600; letter-spacing: 2px; color: #B3C4DD;">FAVOURITES</div>
+        <div style="font-family: 'Zen Kaku Gothic New', sans-serif; font-size: 12px; color: #8EA2C0;">お気に入り</div>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px;">
+        <sc-for list="{{favs}}" as="k" hint-placeholder-count="8">
+          <button class="yuki-cap" onMouseEnter="{{k.focus}}" onClick="{{k.focus}}" aria-label="{{k.name}}" style="outline: none; {{k.style}}">
+            <span style="font-family: Inter, sans-serif; font-weight: 600; font-size: 17px; color: {{k.legend}};">{{k.name}}</span>
+            <span style="font-family: 'Zen Kaku Gothic New', sans-serif; font-size: 12px; align-self: flex-end; color: {{k.sub}};">{{k.kana}}</span>
+          </button>
+        </sc-for>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <div style="display: flex; align-items: baseline; gap: 10px;">
+        <div style="font-size: 13px; font-weight: 600; letter-spacing: 2px; color: #B3C4DD;">ALL APPS</div>
+        <div style="font-family: 'Zen Kaku Gothic New', sans-serif; font-size: 12px; color: #8EA2C0;">すべて</div>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px;">
+        <sc-for list="{{rest}}" as="k" hint-placeholder-count="6">
+          <button class="yuki-cap" onMouseEnter="{{k.focus}}" onClick="{{k.focus}}" aria-label="{{k.name}}" style="outline: none; {{k.style}}">
+            <span style="font-family: Inter, sans-serif; font-weight: 500; font-size: 13px; color: {{k.legend}};">{{k.name}}</span>
+            <span style="font-family: 'Zen Kaku Gothic New', sans-serif; font-size: 11px; align-self: flex-end; color: {{k.sub}};">{{k.kana}}</span>
+          </button>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#EAF1FB","options":["#EAF1FB","#BFD6F2","#F3D9A4","#E8A7B6"]},"snow":{"editor":"range","default":36,"min":0,"max":80,"step":4},"$preview":{"width":960,"height":540}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { focused: 0 }; }
+  renderVals() {
+    const accent = this.props.accent ?? '#EAF1FB';
+    const snow = this.props.snow ?? 36;
+    const favs = [
+      ['YouTube', 'ユーチューブ'], ['Stremio', 'ストレミオ'], ['TV', 'テレビ'], ['Hoichoi', 'ホイチョイ'],
+      ['Netflix', 'ネットフリックス'], ['Prime Video', 'プライム'], ['BBC iPlayer', 'アイプレイヤー'], ['ITVX', 'アイティーヴィー']
+    ];
+    const rest = [
+      ['Channel 4', 'チャンネル4'], ['Kodi', 'コディ'], ['Plex', 'プレックス'], ['Spotify', 'スポティファイ'],
+      ['Settings', '設定'], ['Inputs', '入力']
+    ];
+    const cap = (big, focused) => {
+      const base = 'display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start; box-sizing: border-box; border: none; cursor: pointer; text-align: left; border-radius: ' + (big ? 14 : 11) + 'px; height: ' + (big ? 96 : 70) + 'px; padding: ' + (big ? '14px 16px 16px' : '10px 12px 12px') + ';';
+      if (focused) {
+        return base + ' background: ' + accent + '; box-shadow: inset 0 -7px 0 rgba(30,50,90,.25), inset 0 1px 0 rgba(255,255,255,.8), 0 0 28px rgba(200,220,255,.35), 0 14px 24px rgba(0,0,0,.4); transform: translateY(-5px);';
+      }
+      return base + ' background: linear-gradient(180deg, rgba(60,84,124,.82) 0%, rgba(38,58,94,.82) 100%); box-shadow: inset 0 -7px 0 rgba(10,20,40,.45), inset 0 1px 0 rgba(234,241,251,.18), 0 6px 14px rgba(0,0,0,.3);';
+    };
+    const mk = (list, big, offset) => list.map(([name, kana], j) => {
+      const i = j + offset;
+      const f = this.state.focused === i;
+      return {
+        name, kana,
+        style: cap(big, f),
+        legend: f ? '#0F1C34' : '#EAF1FB',
+        sub: f ? '#2E4468' : '#A9BCD8',
+        focus: () => this.setState({ focused: i })
+      };
+    });
+    const flakes = Array.from({ length: snow }, (_, n) => ({
+      left: ((n * 29.3) % 100).toFixed(1) + '%',
+      size: (2 + (n % 4)) + 'px',
+      op: (0.45 + (n % 5) * 0.1).toFixed(2),
+      delay: ((n * 0.61) % 11).toFixed(2) + 's',
+      dur: (9 + (n % 6) * 1.1).toFixed(1) + 's'
+    }));
+    return { favs: mk(favs, true, 0), rest: mk(rest, false, 100), flakes };
+  }
+}
+</script>
+</body>
+</html>

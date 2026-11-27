@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="background">#FFEEEAE1</color>
+
+    <!-- 960x540 dp screen (1080p UI at density 320). -->
+    <dimen name="edge">44dp</dimen>
+    <!-- edge minus the 6dp margin around each all-apps key, so they line up with home. -->
+    <dimen name="grid_edge">38dp</dimen>
+
+    <string name="app_name">Home</string>
+    <string name="cannot_open">Can\'t open %1$s</string>
+    <string name="settings">Settings</string>
+    <string name="inputs">Inputs</string>
+    <string name="xbox">Xbox</string>
+    <string name="search_apps">Search apps</string>
+    <string name="no_matches">No apps match \"%1$s\"</string>
+    <string name="move_to_group">Move to group…</string>
+    <string name="group_title">Group for %1$s</string>
+    <string name="all_apps">All apps</string>
+    <string name="inputs_title">Inputs</string>
+    <string name="no_inputs">No TV inputs found</string>
+    <string name="move_left">Move left</string>
+    <string name="move_right">Move right</string>
+    <string name="add_favourite">Add to favourites</string>
+    <string name="remove_favourite">Remove from favourites</string>
+    <string name="favourites_full">Full (8)</string>
+    <string name="hide_from_home">Hide from home</string>
+    <string name="show_on_home">Show on home</string>
+    <string name="save_failed">Couldn\'t save the change</string>
+    <string name="vpn_now">Now</string>
+    <string name="move_to_internal">Move to internal storage…</string>
+    <string name="on_usb_detail">On USB</string>
+    <string name="storage_note">%1$s on USB storage · press Menu on it to move back</string>
+    <string name="storage_note_menu">Open the app\'s settings, then Storage used, Change, Internal shared storage.</string>
+
+    <string name="vpn">VPN</string>
+    <string name="vpn_missing">Not installed</string>
+    <string name="vpn_switching">Connecting…</string>
+    <string name="vpn_title">Where apps connect from</string>
+    <string name="vpn_footer">Everything else (Hoichoi, Stremio, Kodi…) always uses the home connection. Pluto TV always goes through the US. Each app connects when you open it from Home.</string>
+    <string name="vpn_others">Others</string>
+    <string name="vpn_mixed">Mixed</string>
+    <string name="vpn_no_response">WireGuard didn\'t respond. In WireGuard settings, turn on \"Allow remote control apps\".</string>
+    <string name="vpn_permission_denied">Needs permission to control WireGuard tunnels.</string>
+
+    <style name="Theme.Home" parent="@android:style/Theme.DeviceDefault.Light.NoActionBar">
+        <item name="android:windowBackground">@color/background</item>
+        <item name="android:windowShowWallpaper">false</item>
+        <item name="android:windowAnimationStyle">@null</item>
+        <item name="android:colorAccent">#FF6B6660</item>
+        <!-- Softer key shadows. -->
+        <item name="android:ambientShadowAlpha">0.06</item>
+        <item name="android:spotShadowAlpha">0.22</item>
+    </style>
+</resources>

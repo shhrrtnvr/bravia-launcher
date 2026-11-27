@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Sakura theme</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Shippori+Mincho:wght@500;700&amp;family=Zen+Kaku+Gothic+New:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#9C4A5C}a:hover{color:#7A3446}
+@keyframes sakuraFall{0%{transform:translate(0,-40px) rotate(0deg);opacity:0}10%{opacity:.9}100%{transform:translate(-120px,600px) rotate(540deg);opacity:0}}
+.sakura-petal{position:absolute;top:0;width:11px;height:7px;border-radius:70% 0 70% 0;background:#EDB3C0;animation:sakuraFall 9s linear infinite}
+.sakura-cap{transition:transform .14s ease,box-shadow .14s ease,background .14s ease}
+</style>
+</helmet>
+<div style="width: 960px; height: 540px; position: relative; overflow: hidden; box-sizing: border-box; background: radial-gradient(90% 80% at 100% 0%, #FBEFF0 0%, #F5EFE6 50%, #EFE8DC 100%); font-family: Inter, system-ui, sans-serif; color: #3A2E2C;">
+
+  <svg aria-hidden="true" width="420" height="200" viewBox="0 0 420 200" style="position: absolute; right: -20px; top: -10px; pointer-events: none;">
+    <path d="M420 18 C 340 30, 300 60, 250 70 S 170 92, 120 128 M 300 58 C 290 90, 270 110, 240 126 M 210 82 C 200 60, 205 40, 190 22" fill="none" stroke="#6E5A52" stroke-width="3" stroke-linecap="round" opacity="0.55"></path>
+    <g fill="#F0BAC6" opacity="0.9">
+      <circle cx="250" cy="70" r="7"></circle><circle cx="262" cy="62" r="5"></circle><circle cx="120" cy="128" r="6"></circle>
+      <circle cx="134" cy="120" r="4"></circle><circle cx="240" cy="126" r="6"></circle><circle cx="190" cy="22" r="6"></circle>
+      <circle cx="200" cy="30" r="4"></circle><circle cx="330" cy="40" r="6"></circle><circle cx="300" cy="58" r="5"></circle>
+      <circle cx="168" cy="98" r="5"></circle><circle cx="370" cy="28" r="4"></circle>
+    </g>
+    <g fill="#E4919F"><circle cx="252" cy="68" r="2"></circle><circle cx="242" cy="124" r="2"></circle><circle cx="331" cy="39" r="2"></circle></g>
+  </svg>
+
+  <div aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none;">
+    <sc-for list="{{petals}}" as="p" hint-placeholder-count="14">
+      <div class="sakura-petal" style="left: {{p.left}}; animation-delay: {{p.delay}}; animation-duration: {{p.dur}}; opacity: {{p.op}};"></div>
+    </sc-for>
+  </div>
+
+  <div style="position: relative; box-sizing: border-box; height: 100%; padding: 30px 48px 0; display: flex; flex-direction: column; gap: 22px;">
+
+    <div style="display: flex; align-items: flex-end; gap: 18px;">
+      <div style="font-family: 'Shippori Mincho', serif; font-weight: 500; font-size: 56px; line-height: 0.9; color: #3A2E2C;">04:14</div>
+      <div style="display: flex; flex-direction: column; gap: 4px; padding-bottom: 2px; flex-grow: 1;">
+        <div style="font-family: 'Zen Kaku Gothic New', sans-serif; font-size: 15px; color: #7A6763;">金曜日 · 桜の季節</div>
+        <div style="font-size: 13px; color: #6B5A56;">Friday 27 November · clear, 24°</div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 10px; padding: 9px 14px 9px 10px; border-radius: 12px; background: linear-gradient(180deg,#FFFBF5,#F1E9DD); box-shadow: inset 0 -4px 0 #DCCFBE, 0 4px 10px rgba(110,80,70,.15);">
+        <div style="width: 26px; height: 26px; border-radius: 13px; background: #A8CDB9; color: #24443A; font-family: 'Shippori Mincho', serif; font-weight: 700; font-size: 15px; display: flex; align-items: center; justify-content: center;">英</div>
+        <div style="font-size: 14px; font-weight: 500; color: #3A2E2C;">VPN · UK</div>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <div style="display: flex; align-items: baseline; gap: 10px;">
+        <div style="font-size: 13px; font-weight: 600; letter-spacing: 2px; color: #6B5A56;">FAVOURITES</div>
+        <div style="font-family: 'Zen Kaku Gothic New', sans-serif; font-size: 12px; color: #6B5A56;">お気に入り</div>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px;">
+        <sc-for list="{{favs}}" as="k" hint-placeholder-count="8">
+          <button class="sakura-cap" onMouseEnter="{{k.focus}}" onClick="{{k.focus}}" aria-label="{{k.name}}" style="outline: none; {{k.style}}">
+            <span style="font-family: Inter, sans-serif; font-weight: 600; font-size: 17px; color: {{k.legend}};">{{k.name}}</span>
+            <span style="font-family: 'Zen Kaku Gothic New', sans-serif; font-size: 12px; align-self: flex-end; color: {{k.sub}};">{{k.kana}}</span>
+          </button>
+        </sc-for>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <div style="display: flex; align-items: baseline; gap: 10px;">
+        <div style="font-size: 13px; font-weight: 600; letter-spacing: 2px; color: #6B5A56;">ALL APPS</div>
+        <div style="font-family: 'Zen Kaku Gothic New', sans-serif; font-size: 12px; color: #6B5A56;">すべて</div>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px;">
+        <sc-for list="{{rest}}" as="k" hint-placeholder-count="6">
+          <button class="sakura-cap" onMouseEnter="{{k.focus}}" onClick="{{k.focus}}" aria-label="{{k.name}}" style="outline: none; {{k.style}}">
+            <span style="font-family: Inter, sans-serif; font-weight: 500; font-size: 13px; color: {{k.legend}};">{{k.name}}</span>
+            <span style="font-family: 'Zen Kaku Gothic New', sans-serif; font-size: 11px; align-self: flex-end; color: {{k.sub}};">{{k.kana}}</span>
+          </button>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#E59AAB","options":["#E59AAB","#A8CDB9","#B8C4E8","#F0C987"]},"petals":{"editor":"boolean","default":true},"$preview":{"width":960,"height":540}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { focused: 0 }; }
+  renderVals() {
+    const accent = this.props.accent ?? '#E59AAB';
+    const showPetals = this.props.petals ?? true;
+    const favs = [
+      ['YouTube', 'ユーチューブ', 'cream'], ['Stremio', 'ストレミオ', 'cream'], ['TV', 'テレビ', 'mint'], ['Hoichoi', 'ホイチョイ', 'cream'],
+      ['Netflix', 'ネットフリックス', 'cream'], ['Prime Video', 'プライム', 'cream'], ['BBC iPlayer', 'アイプレイヤー', 'mint'], ['ITVX', 'アイティーヴィー', 'mint']
+    ];
+    const rest = [
+      ['Channel 4', 'チャンネル4', 'cream'], ['Kodi', 'コディ', 'cream'], ['Plex', 'プレックス', 'cream'], ['Spotify', 'スポティファイ', 'cream'],
+      ['Settings', '設定', 'mint'], ['Inputs', '入力', 'mint']
+    ];
+    const faces = {
+      cream: ['#FFFCF7', '#F2EADF', '#DCCFBE'],
+      mint: ['#D3E8DB', '#BDD9C8', '#9CBFAB']
+    };
+    const cap = (big, tone, focused) => {
+      const base = 'display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start; box-sizing: border-box; border: none; cursor: pointer; text-align: left; border-radius: ' + (big ? 14 : 11) + 'px; height: ' + (big ? 96 : 70) + 'px; padding: ' + (big ? '14px 16px 16px' : '10px 12px 12px') + ';';
+      if (focused) {
+        return base + ' background: ' + accent + '; box-shadow: inset 0 -7px 0 rgba(90,40,50,.22), inset 0 1px 0 rgba(255,255,255,.5), 0 14px 24px rgba(150,80,95,.3); transform: translateY(-5px);';
+      }
+      const f = faces[tone];
+      return base + ' background: linear-gradient(180deg, ' + f[0] + ' 0%, ' + f[1] + ' 100%); box-shadow: inset 0 -7px 0 ' + f[2] + ', 0 5px 10px rgba(110,80,70,.12);';
+    };
+    const mk = (list, big, offset) => list.map(([name, kana, tone], j) => {
+      const i = j + offset;
+      const f = this.state.focused === i;
+      return {
+        name, kana,
+        style: cap(big, tone, f),
+        legend: f ? '#3A1D24' : '#3A2E2C',
+        sub: f ? '#5A2E38' : '#7A6763',
+        focus: () => this.setState({ focused: i })
+      };
+    });
+    const petals = showPetals ? Array.from({ length: 16 }, (_, n) => ({
+      left: (8 + (n * 37.3) % 96).toFixed(1) + '%',
+      delay: ((n * 0.83) % 9).toFixed(2) + 's',
+      dur: (8 + (n % 4) * 1.3).toFixed(1) + 's',
+      op: (0.55 + (n % 3) * 0.15).toFixed(2)
+    })) : [];
+    return { favs: mk(favs, true, 0), rest: mk(rest, false, 100), petals };
+  }
+}
+</script>
+</body>
+</html>

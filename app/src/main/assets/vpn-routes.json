@@ -1,0 +1,233 @@
+{
+  "_comment": "Which apps go where. Read by the launcher (VpnRoutes) and by scripts/vpn-configs.py, which writes the WireGuard tunnel files. Apps in no group always use the home connection. After changing groups or tunnels: re-run the script and re-import the tunnels in WireGuard. Groups whose apps aren't installed don't show in the panel.",
+  "locations": {
+    "home": "Bangladesh",
+    "london": "London",
+    "manchester": "Manchester",
+    "edinburgh": "Edinburgh",
+    "glasgow": "Glasgow",
+    "us": "US",
+    "japan": "Japan",
+    "canada": "Canada",
+    "spain": "Spain"
+  },
+  "groups": [
+    {
+      "id": "uk",
+      "title": "UK apps",
+      "apps": [
+        "com.nvidia.bbciplayer",
+        "air.ITVMobilePlayer",
+        "com.channel4.ondemand",
+        "tv.stv.android.player",
+        "tv.wuaki.apptv"
+      ],
+      "choices": [
+        "london",
+        "manchester",
+        "edinburgh",
+        "glasgow"
+      ]
+    },
+    {
+      "id": "youtube",
+      "title": "YouTube",
+      "apps": [
+        "com.google.android.youtube.tv",
+        "org.smarttube.stable"
+      ],
+      "choices": [
+        "home",
+        "uk",
+        "us"
+      ]
+    },
+    {
+      "id": "netflix",
+      "title": "Netflix",
+      "apps": [
+        "com.netflix.ninja"
+      ],
+      "choices": [
+        "home",
+        "uk",
+        "us",
+        "japan",
+        "canada"
+      ]
+    },
+    {
+      "id": "prime",
+      "title": "Prime Video",
+      "apps": [
+        "com.amazon.amazonvideo.livingroom"
+      ],
+      "choices": [
+        "home",
+        "uk",
+        "us"
+      ]
+    },
+    {
+      "id": "max",
+      "title": "Max",
+      "apps": [
+        "com.wbd.stream",
+        "com.hbo.hbonow"
+      ],
+      "choices": [
+        "home",
+        "us",
+        "spain"
+      ]
+    },
+    {
+      "id": "disney",
+      "title": "Disney+",
+      "apps": [
+        "com.disney.disneyplus"
+      ],
+      "choices": [
+        "home",
+        "uk",
+        "us",
+        "japan"
+      ]
+    },
+    {
+      "id": "us",
+      "title": "US apps",
+      "apps": [
+        "tv.pluto.android"
+      ],
+      "choices": [
+        "us"
+      ]
+    }
+  ],
+  "_tunnels": "WireGuard tunnel name (max 15 chars) -> server location + groups it carries. 'uk' as a choice means the UK apps' city. Per UK city: UK apps only (resting), + YouTube (resting when YouTube is UK), + everything that can choose UK (opened from the launcher).",
+  "tunnels": {
+    "uk-lon": {
+      "location": "london",
+      "groups": [
+        "uk"
+      ]
+    },
+    "uk-lon-yt": {
+      "location": "london",
+      "groups": [
+        "uk",
+        "youtube"
+      ]
+    },
+    "uk-lon-all": {
+      "location": "london",
+      "groups": [
+        "uk",
+        "youtube",
+        "netflix",
+        "prime",
+        "disney"
+      ]
+    },
+    "uk-man": {
+      "location": "manchester",
+      "groups": [
+        "uk"
+      ]
+    },
+    "uk-man-yt": {
+      "location": "manchester",
+      "groups": [
+        "uk",
+        "youtube"
+      ]
+    },
+    "uk-man-all": {
+      "location": "manchester",
+      "groups": [
+        "uk",
+        "youtube",
+        "netflix",
+        "prime",
+        "disney"
+      ]
+    },
+    "uk-edi": {
+      "location": "edinburgh",
+      "groups": [
+        "uk"
+      ]
+    },
+    "uk-edi-yt": {
+      "location": "edinburgh",
+      "groups": [
+        "uk",
+        "youtube"
+      ]
+    },
+    "uk-edi-all": {
+      "location": "edinburgh",
+      "groups": [
+        "uk",
+        "youtube",
+        "netflix",
+        "prime",
+        "disney"
+      ]
+    },
+    "uk-gla": {
+      "location": "glasgow",
+      "groups": [
+        "uk"
+      ]
+    },
+    "uk-gla-yt": {
+      "location": "glasgow",
+      "groups": [
+        "uk",
+        "youtube"
+      ]
+    },
+    "uk-gla-all": {
+      "location": "glasgow",
+      "groups": [
+        "uk",
+        "youtube",
+        "netflix",
+        "prime",
+        "disney"
+      ]
+    },
+    "us": {
+      "location": "us",
+      "groups": [
+        "us",
+        "youtube",
+        "netflix",
+        "prime",
+        "max",
+        "disney"
+      ]
+    },
+    "jp": {
+      "location": "japan",
+      "groups": [
+        "netflix",
+        "disney"
+      ]
+    },
+    "ca": {
+      "location": "canada",
+      "groups": [
+        "netflix"
+      ]
+    },
+    "es": {
+      "location": "spain",
+      "groups": [
+        "max"
+      ]
+    }
+  }
+}

@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Sakura theme</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#A0615C}a:hover{color:#7C4844}
+@keyframes sakuraFall{0%{transform:translate(0,-20px) rotate(0deg);opacity:0}8%{opacity:.95}100%{transform:translate(-160px,580px) rotate(520deg);opacity:.2}}
+.sakura-petal{position:absolute;top:0;width:10px;height:7px;border-radius:70% 0 70% 0;background:#EFAFBE;box-shadow:0 1px 2px rgba(150,80,90,.25);animation:sakuraFall 11s linear infinite}
+.sakura-cap{transition:transform .16s ease,box-shadow .16s ease,background .16s ease}
+</style>
+</helmet>
+<div style="width: 960px; height: 540px; position: relative; overflow: hidden; font-family: Inter, system-ui, sans-serif; color: #2E2A29;">
+
+  <div aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(180deg, #FBF3F0 0%, #F7EAE6 55%, #EFE1D9 100%); pointer-events: none;">
+    <svg width="960" height="540" viewBox="0 0 960 540" style="position: absolute; inset: 0;">
+      <path d="M0 455 C 150 420, 300 440, 470 430 C 630 420, 770 448, 960 428 L 960 540 L 0 540 Z" fill="#EBDAD2"></path>
+      <path d="M0 492 C 210 470, 420 488, 640 478 C 790 472, 880 486, 960 482 L 960 540 L 0 540 Z" fill="#E3CFC5"></path>
+      <path d="M870 540 C 862 470, 842 420, 808 360 C 786 322, 774 280, 744 228" stroke="#6E524B" stroke-width="24" stroke-linecap="round" fill="none"></path>
+      <path d="M796 342 C 724 300, 642 252, 562 204 C 502 168, 442 124, 380 92" stroke="#6E524B" stroke-width="11" stroke-linecap="round" fill="none"></path>
+      <path d="M762 262 C 724 202, 704 142, 692 58" stroke="#6E524B" stroke-width="9" stroke-linecap="round" fill="none"></path>
+      <path d="M748 236 C 804 192, 864 152, 960 120" stroke="#6E524B" stroke-width="8" stroke-linecap="round" fill="none"></path>
+      <path d="M612 232 C 602 182, 582 132, 542 82" stroke="#6E524B" stroke-width="5" stroke-linecap="round" fill="none"></path>
+      <path d="M472 146 C 432 130, 382 140, 322 160" stroke="#6E524B" stroke-width="4" stroke-linecap="round" fill="none"></path>
+      <path d="M834 410 C 882 382, 922 372, 960 374" stroke="#6E524B" stroke-width="6" stroke-linecap="round" fill="none"></path>
+    </svg>
+    <sc-for list="{{blossoms}}" as="b" hint-placeholder-count="0">
+      <div style="position: absolute; left: {{b.x}}; top: {{b.y}}; width: {{b.d}}; height: {{b.d}}; border-radius: 50%; background: {{b.c}}; opacity: {{b.o}};"></div>
+    </sc-for>
+    <sc-for list="{{fallen}}" as="f" hint-placeholder-count="0">
+      <div style="position: absolute; left: {{f.x}}; top: {{f.y}}; width: 9px; height: 5px; border-radius: 70% 0 70% 0; background: #EDB2BF; opacity: {{f.o}}; transform: rotate({{f.r}});"></div>
+    </sc-for>
+    <sc-for list="{{petals}}" as="p" hint-placeholder-count="0">
+      <div class="sakura-petal" style="left: {{p.left}}; animation-delay: {{p.delay}}; animation-duration: {{p.dur}};"></div>
+    </sc-for>
+  </div>
+
+  <div style="position: relative; box-sizing: border-box; height: 100%; padding: 26px 44px 0; display: flex; flex-direction: column; gap: 18px;">
+    <div style="display: flex; gap: 14px; height: 84px;">
+      <div style="flex-grow: 1; border-radius: 18px; background: rgba(255,255,255,.42); backdrop-filter: blur(20px) saturate(150%); -webkit-backdrop-filter: blur(20px) saturate(150%); border: 1px solid rgba(255,255,255,.7); box-shadow: inset 0 1px 0 rgba(255,255,255,.9), 0 10px 30px rgba(90,50,45,.08); display: flex; align-items: center; gap: 18px; padding: 0 24px;">
+        <div style="font-weight: 300; font-size: 44px; line-height: 1; letter-spacing: -1px;">04:14</div>
+        <div style="font-size: 14px; color: #6E6260;">Friday, 27 November</div>
+      </div>
+      <button class="sakura-cap" onMouseEnter="{{vpn.focus}}" onClick="{{vpn.focus}}" aria-label="VPN: UK" style="outline: none; {{vpn.style}}">
+        <span style="font-size: 12px; font-weight: 500; color: #6E6260; letter-spacing: 1px;">VPN</span>
+        <span style="font-size: 18px; font-weight: 600; color: #2E2A29;">UK</span>
+      </button>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px;">
+      <sc-for list="{{favs}}" as="k" hint-placeholder-count="8">
+        <button class="sakura-cap" onMouseEnter="{{k.focus}}" onClick="{{k.focus}}" aria-label="{{k.name}}" style="outline: none; {{k.style}}">
+          <span style="font-weight: 500; font-size: 17px; color: #2E2A29;">{{k.name}}</span>
+        </button>
+      </sc-for>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px;">
+      <sc-for list="{{rest}}" as="k" hint-placeholder-count="6">
+        <button class="sakura-cap" onMouseEnter="{{k.focus}}" onClick="{{k.focus}}" aria-label="{{k.name}}" style="outline: none; {{k.style}}">
+          <span style="font-weight: 500; font-size: 13px; color: #2E2A29;">{{k.name}}</span>
+        </button>
+      </sc-for>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#E2A6AE","options":["#E2A6AE","#C98F88","#B9C7B4","#C9B79C"]},"petals":{"editor":"range","default":22,"min":0,"max":50,"step":2},"$preview":{"width":960,"height":540}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { focused: 0 }; }
+  renderVals() {
+    const accent = this.props.accent ?? '#E2A6AE';
+    const petalCount = this.props.petals ?? 22;
+    const favs = [['YouTube'], ['Stremio'], ['TV', true], ['Hoichoi'], ['Netflix'], ['Prime Video'], ['BBC iPlayer'], ['ITVX']];
+    const rest = [['Settings', true], ['Inputs', true], ['Channel 4'], ['Kodi'], ['Plex'], ['All apps', true]];
+    const cap = (h, r, pad, mod, focused) => {
+      const face = mod ? 'rgba(250,238,236,.55)' : 'rgba(255,255,255,.6)';
+      const base = 'position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; align-items: flex-start; box-sizing: border-box; cursor: pointer; text-align: left; border-radius: ' + r + 'px; height: ' + h + 'px; padding: ' + pad + '; border: 1px solid rgba(255,255,255,.8); backdrop-filter: blur(16px) saturate(150%); -webkit-backdrop-filter: blur(16px) saturate(150%);';
+      if (focused) {
+        return base + ' background: linear-gradient(135deg, rgba(255,255,255,.97) 0%, rgba(255,255,255,.62) 44%, rgba(255,255,255,.85) 100%); box-shadow: inset 0 1px 0 #FFFFFF, inset 0 -4px 0 rgba(0,0,0,.04), 0 0 0 1.5px ' + accent + ', 0 24px 40px rgba(90,50,45,.24); transform: translateY(-4px) scale(1.06); z-index: 2;';
+      }
+      return base + ' background: ' + face + '; box-shadow: inset 0 1px 0 rgba(255,255,255,.9), inset 0 -4px 0 rgba(0,0,0,.035), 0 6px 16px rgba(90,50,45,.07);';
+    };
+    const mk = (list, big, offset) => list.map(([name, mod], j) => {
+      const i = j + offset;
+      const f = this.state.focused === i;
+      return {
+        name,
+        style: big ? cap(96, 18, '0 16px 18px', !!mod, f) : cap(66, 15, '0 12px 14px', !!mod, f),
+        focus: () => this.setState({ focused: i })
+      };
+    });
+    const vf = this.state.focused === -1;
+    const vpn = {
+      style: cap(84, 18, '0 16px 16px', true, vf) + ' width: 130px; flex-shrink: 0; gap: 2px;',
+      focus: () => this.setState({ focused: -1 })
+    };
+
+    let seed = 11;
+    const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+    const centers = [[380,92],[440,118],[500,148],[560,188],[622,230],[682,262],[542,82],[592,116],[692,62],[704,128],[744,196],[802,160],[862,138],[930,116],[330,158],[902,362],[952,378],[764,300],[642,170],[470,96],[820,90],[640,60]];
+    const cols = ['#F7CDD5', '#F1B6C3', '#FBE0E5', '#EBA5B5', '#FFFFFF', '#F4C0CB'];
+    const blossoms = [];
+    centers.forEach(([cx, cy]) => {
+      for (let n = 0; n < 26; n++) {
+        const r = 5 + rnd() * 11;
+        blossoms.push({
+          x: (cx + (rnd() - 0.5) * 110 - r).toFixed(0) + 'px',
+          y: (cy + (rnd() - 0.5) * 70 - r).toFixed(0) + 'px',
+          d: (2 * r).toFixed(0) + 'px',
+          c: cols[Math.floor(rnd() * cols.length)],
+          o: (0.55 + rnd() * 0.4).toFixed(2)
+        });
+      }
+    });
+    const fallen = Array.from({ length: 46 }, () => ({
+      x: (rnd() * 950).toFixed(0) + 'px',
+      y: (470 + rnd() * 64).toFixed(0) + 'px',
+      o: (0.45 + rnd() * 0.5).toFixed(2),
+      r: (rnd() * 180).toFixed(0) + 'deg'
+    }));
+    const petals = Array.from({ length: petalCount }, (_, n) => ({
+      left: (10 + (n * 41.3) % 95).toFixed(1) + '%',
+      delay: ((n * 0.9) % 11).toFixed(2) + 's',
+      dur: (9 + (n % 4) * 1.6).toFixed(1) + 's'
+    }));
+    return { favs: mk(favs, true, 0), rest: mk(rest, false, 100), vpn, blossoms, fallen, petals };
+  }
+}
+</script>
+</body>
+</html>

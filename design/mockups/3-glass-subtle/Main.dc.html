@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Ume theme</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#9E3B32}a:hover{color:#7A2C25}
+@keyframes umeBloom{0%{transform:scale(.4);opacity:0}100%{transform:scale(1);opacity:1}}
+.ume-cap{transition:transform .14s ease,box-shadow .14s ease}
+.ume-bloom{animation:umeBloom .3s ease-out both}
+</style>
+</helmet>
+<div style="width: 960px; height: 540px; position: relative; overflow: hidden; box-sizing: border-box; background: radial-gradient(55% 70% at 88% 8%, rgba(181,72,61,.13) 0%, rgba(181,72,61,0) 70%), radial-gradient(50% 60% at 6% 96%, rgba(110,100,90,.14) 0%, rgba(110,100,90,0) 70%), radial-gradient(40% 50% at 45% 55%, rgba(255,255,255,.7) 0%, rgba(255,255,255,0) 70%), #EFEDE9; font-family: Inter, system-ui, sans-serif; color: #2B2927; padding: 28px 44px 0; display: flex; flex-direction: column; gap: 20px;">
+
+  <div style="display: flex; gap: 14px; height: 84px;">
+    <div style="flex-grow: 1; position: relative; overflow: hidden; border-radius: 18px; background: rgba(255,255,255,.5); backdrop-filter: blur(24px) saturate(150%); -webkit-backdrop-filter: blur(24px) saturate(150%); border: 1px solid rgba(255,255,255,.75); box-shadow: inset 0 1px 0 rgba(255,255,255,.9), 0 10px 30px rgba(40,35,30,.07); display: flex; align-items: center; gap: 18px; padding: 0 24px 6px;">
+      <svg aria-hidden="true" width="190" height="84" viewBox="0 0 190 84" style="position: absolute; right: 0; top: 0;">
+        <path d="M190 10 C 160 18, 140 30, 122 52" stroke="#3A3633" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.55"></path>
+        <path d="M152 24 C 150 16, 146 10, 140 6" stroke="#3A3633" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.45"></path>
+        <g fill="#B5483D" opacity="0.75"><circle cx="146" cy="30" r="3.5"></circle><circle cx="130" cy="44" r="3"></circle><circle cx="168" cy="17" r="3"></circle><circle cx="141" cy="8" r="2.5"></circle></g>
+      </svg>
+      <div style="position: relative; font-weight: 400; font-size: 42px; line-height: 1; letter-spacing: -1px;">04:14</div>
+      <div style="position: relative; font-size: 14px; color: #77726C;">Friday, 27 November</div>
+    </div>
+    <button class="ume-cap" onMouseEnter="{{vpn.focus}}" onClick="{{vpn.focus}}" aria-label="VPN: UK" style="outline: none; {{vpn.style}}">
+      <span style="font-size: 12px; font-weight: 500; color: #77726C; letter-spacing: 1px;">VPN</span>
+      <span style="font-size: 18px; font-weight: 600; color: #2B2927;">UK</span>
+    </button>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px;">
+    <sc-for list="{{favs}}" as="k" hint-placeholder-count="8">
+      <button class="ume-cap" onMouseEnter="{{k.focus}}" onClick="{{k.focus}}" aria-label="{{k.name}}" style="outline: none; {{k.style}}">
+        <sc-if value="{{k.focused}}" hint-placeholder-val="{{false}}">
+          <svg class="ume-bloom" aria-hidden="true" width="34" height="34" viewBox="0 0 34 34" style="position: absolute; right: 8px; top: 8px;">
+            <path d="M34 2 C 26 6, 20 12, 14 22" stroke="#3A3633" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.6"></path>
+            <circle cx="22" cy="11" r="3.5" fill="#B5483D"></circle><circle cx="15" cy="20" r="2.5" fill="#B5483D" opacity="0.8"></circle>
+          </svg>
+        </sc-if>
+        <span style="position: relative; font-weight: 500; font-size: 17px; color: #2B2927;">{{k.name}}</span>
+      </button>
+    </sc-for>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px;">
+    <sc-for list="{{rest}}" as="k" hint-placeholder-count="12">
+      <button class="ume-cap" onMouseEnter="{{k.focus}}" onClick="{{k.focus}}" aria-label="{{k.name}}" style="outline: none; {{k.style}}">
+        <span style="position: relative; font-weight: 500; font-size: 13px; color: #2B2927;">{{k.name}}</span>
+      </button>
+    </sc-for>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#B5483D","options":["#B5483D","#2B2927","#7C8A6E","#5E7A94"]},"$preview":{"width":960,"height":540}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { focused: 0 }; }
+  renderVals() {
+    const accent = this.props.accent ?? '#B5483D';
+    const favs = [['YouTube'], ['Stremio'], ['TV', true], ['Hoichoi'], ['Netflix'], ['Prime Video'], ['BBC iPlayer'], ['ITVX']];
+    const rest = [['Settings', true], ['Channel 4'], ['Kodi'], ['Plex'], ['Spotify'], ['Inputs', true], ['Downloader'], ['Pluto TV'], ['SmartTube'], ['MX Player'], ['LocalSend'], ['WireGuard']];
+    // Glass keycaps: frosted white over the soft backdrop; the focused one grows and catches the light (Apple TV style).
+    const cap = (h, r, pad, mod, focused) => {
+      const face = mod ? 'rgba(236,233,228,.62)' : 'rgba(255,255,255,.66)';
+      const base = 'position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; align-items: flex-start; box-sizing: border-box; cursor: pointer; text-align: left; border-radius: ' + (r + 4) + 'px; height: ' + h + 'px; padding: ' + pad + '; border: 1px solid rgba(255,255,255,.8); backdrop-filter: blur(18px) saturate(150%); -webkit-backdrop-filter: blur(18px) saturate(150%);';
+      if (focused) {
+        return base + ' background: linear-gradient(135deg, rgba(255,255,255,.95) 0%, rgba(255,255,255,.55) 42%, rgba(255,255,255,.8) 100%); box-shadow: inset 0 1px 0 #FFFFFF, inset 0 -4px 0 rgba(0,0,0,.04), 0 0 0 1.5px ' + accent + '55, 0 24px 40px rgba(40,35,30,.22); transform: translateY(-4px) scale(1.06); z-index: 2;';
+      }
+      return base + ' background: ' + face + '; box-shadow: inset 0 1px 0 rgba(255,255,255,.9), inset 0 -4px 0 rgba(0,0,0,.035), 0 6px 16px rgba(40,35,30,.06);';
+    };
+    const mk = (list, big, offset) => list.map(([name, mod], j) => {
+      const i = j + offset;
+      const f = this.state.focused === i;
+      return {
+        name, focused: f,
+        style: big ? cap(100, 14, '0 16px 20px', !!mod, f) : cap(70, 11, '0 12px 16px', !!mod, f),
+        focus: () => this.setState({ focused: i })
+      };
+    });
+    const vf = this.state.focused === -1;
+    const vpn = {
+      style: cap(84, 14, '0 16px 18px', true, vf) + ' width: 130px; flex-shrink: 0; gap: 2px;',
+      focus: () => this.setState({ focused: -1 })
+    };
+    return { favs: mk(favs, true, 0), rest: mk(rest, false, 100), vpn };
+  }
+}
+</script>
+</body>
+</html>
